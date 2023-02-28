@@ -37,7 +37,7 @@ export const helloFromLambdaHandler = async () => {
     "created_at",
     "bio",
   ];
-  let newFans = await get_new_comedians(dbConfig);
+  let newFans = await get_new_fans(dbConfig);
   await update_new_user_sheet(
     "New Fans",
     newFansHeaders,
