@@ -25,7 +25,10 @@ Docker and SAM are requirements.
 
     cd plauz-report-new-users
     sam build
-    sam invoke local
+    # local dev not available currently due to encryption, etc
+    # sam invoke local
+    # or
+    sam deploy --guided  --profile dev-account
 
 ## Deployment
 

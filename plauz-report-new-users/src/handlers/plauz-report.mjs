@@ -5,7 +5,8 @@ const NEW_USERS_REPORT = 'new-users-report';
 /**
  * A Lambda function that returns a static string
  */
-export const helloFromLambdaHandler = async (event) => {
+export const plauzReportLambdaHandler = async (event) => {
+  console.log('newest version from plauzReportLambdaHandler');
   // Route the request
   if (!event || ! event['report-type']) {
     throw new Error('Expected report-type property');
