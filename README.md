@@ -14,6 +14,11 @@ Currently there is only one lambda project. Creating as a sub-folder in case we 
 
 * plauz-report-new-users
 
+
+## Dev versus Production
+
+Currently I am using two different AWS accounts. I first push to a local account to test.
+
 ## Development
 
 Docker and SAM are requirements.
@@ -24,4 +29,7 @@ Docker and SAM are requirements.
 
 ## Deployment
 
+You can use `--no-confirm-changeset` to skip the last question.
+
+    sam build
     sam deploy --guided  --profile plauzzable

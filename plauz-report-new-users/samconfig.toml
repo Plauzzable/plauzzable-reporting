@@ -17,11 +17,11 @@ parallel = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
-s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1ntvavxua8qmt"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-p5ttohscjlag"
 s3_prefix = "plauz-report-new-users"
 region = "us-east-1"
 image_repositories = []
-profile = "plauz"
+profile = "anyselfie"
 
 [default.package]
 [default.package.parameters]
