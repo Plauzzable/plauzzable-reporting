@@ -1,5 +1,5 @@
 
-const parseDatabaseConfig = (database) => {
+const parseDatabaseConfig = (database, pgSchema) => {
     let parts = database.split("|");
     let host = parts[0];
     let port = parts[1];
@@ -8,7 +8,7 @@ const parseDatabaseConfig = (database) => {
     return {
       user,
       host,
-      database: "ms-users",
+      database: pgSchema,
       password,
       port,
     };

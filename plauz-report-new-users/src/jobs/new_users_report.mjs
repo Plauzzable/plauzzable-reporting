@@ -2,12 +2,13 @@ import { GoogleSpreadsheet } from "google-spreadsheet";
 import pg from "pg";
 
 
-import {decrypt_env_var} from './env_vars.mjs';
-import {parseDatabaseConfig} from './database.mjs';
+import {decrypt_env_var} from '../lib/env_vars.mjs';
+import {parseDatabaseConfig} from '../lib/database.mjs';
 
 const new_users_report = async (event) => {
+  console.log('Running new users report');
     let database = await decrypt_env_var("DATABASE");
-    let dbConfig = parseDatabaseConfig(database);
+    let dbConfig = parseDatabaseConfig(database, "ms-users");
     let gServiceAccount = await decrypt_env_var("SERVICE_ACCOUNT_JSON");
   
     let newComedianHeaders = [
@@ -88,11 +89,14 @@ const new_users_report = async (event) => {
       WHERE "user"."isComedian" = true
       ORDER BY "user"."createdAt" DESC
       LIMIT 50;`;
+
+      console.log('query', dbConfig.database, sql);
   
     const client = new pg.Client(dbConfig);
     await client.connect();
   
     const res = await client.query(sql, []);
+    console.log('processing results');
   
     for (let i = 0; i < res.rows.length; i++) {
       let row = res.rows[i];

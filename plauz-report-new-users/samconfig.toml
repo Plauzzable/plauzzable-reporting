@@ -15,8 +15,8 @@ parallel = true
 [default.deploy]
 [default.deploy.parameters]
 capabilities = "CAPABILITY_IAM"
-confirm_changeset = true
-resolve_s3 = true
+confirm_changeset = false
+resolve_s3 = false
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-p5ttohscjlag"
 s3_prefix = "plauz-report-new-users"
 region = "us-east-1"
@@ -25,7 +25,7 @@ profile = "anyselfie"
 
 [default.package]
 [default.package.parameters]
-resolve_s3 = true
+resolve_s3 = false
 
 [default.sync]
 [default.sync.parameters]
