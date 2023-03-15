@@ -5,33 +5,39 @@ import { decrypt_env_var } from './env_vars.mjs';
 
 const SENDINBLUE_REMINDER_FAN_TEMPLATE_ID = 2;
 
-const send_fan_reminder_email = (show) => {
-  // TODO: Building out send_comedian first
+const send_show_reminder_email = async (show) => {
+
+  let recipient = show.comedian;
+  await _send_reminder(recipient, show);
+  for (let i = 0; i < show.audience.length; i++) {
+    let recipient = show.audience[i];
+    await _send_reminder(recipient, show);
+  }
 };
 
-const send_comedian_reminder_email = async (show) => {
-  const FIRSTNAME = show.comedian.firstName;
+const _send_reminder = async (recipient, show) => {
+  const FIRSTNAME = recipient.firstName;
   const SHOWTITLE = show.title;
   const SHOWLINK = `https://plauzzable.com/live-show/?showId=${show.id}&comedianId=${show.userId}`;
 
   let minutes = Math.round(show.minutes);
   const STARTSINMINUTES = minutes > 1 ? 'in ' + minutes + ' minutes' : 'now';
-    
+
   // Used for debugging only
   const STARTTIME = show.startTime;
   const NOW = show.now;
 
   var apiKey = defaultClient.authentications['api-key'];
   apiKey.apiKey = await decrypt_env_var('SENDINBLUE_API_KEY');
-  
+
   var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
   var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   sendSmtpEmail = {
     to: [{
-      // show.comedian.email
-      email: 'opt-out@opsdrill.com',
-      name: `${show.comedian.firstName} ${show.comedian.lastName}`
+      // TODO: test opt out - do we need to create contacts on our side?
+      email: `${recipient.email}`,
+      name: `${recipient.firstName} ${recipient.lastName}`
     }],
     templateId: SENDINBLUE_REMINDER_FAN_TEMPLATE_ID,
     params: {
@@ -54,8 +60,6 @@ const send_comedian_reminder_email = async (show) => {
       reject(error);
     });
   });
-  
-
 };
 
-export { send_comedian_reminder_email, send_fan_reminder_email };
+export { send_show_reminder_email };
