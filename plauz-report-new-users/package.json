@@ -22,7 +22,7 @@
         ]
     },
     "dependencies": {
-        "aws-sdk": "^2.1322.0",
+        "@aws-sdk/client-kms": "^3.300.0",
         "google-spreadsheet": "^3.3.0",
         "pg": "^8.9.0",
         "sib-api-v3-sdk": "^8.5.0"
