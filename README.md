@@ -20,6 +20,10 @@ Currently there is only one lambda project. Creating as a sub-folder in case we 
 
 Currently I am using two different AWS accounts. I first push to a local account to test.
 
+    # backup prod
+    cp samconfig.toml samconfig.toml-plauz
+    cp samconfig.toml-dev samconfig.toml
+
 ## Development
 
 Docker and SAM are requirements.

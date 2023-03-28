@@ -9,18 +9,12 @@ const upcoming_show_reminder_email_report = async (event) => {
     console.log('Running upcoming shows report');
     let database = await decrypt_env_var("DATABASE");
     let dbConfig = parseDatabaseConfig(database, "ms-shows");
-    let shows = await get_upcoming_shows(dbConfig);
+    let shows = await get_upcoming_shows_and_send_emails(dbConfig);
     console.log('Upcoming shows include:', shows);
-
-
-    for (var i = 0; i < shows.length; i++) {
-
-    }
-
     return "Success";
 };
 
-const get_upcoming_shows = async (dbConfig) => {
+const get_upcoming_shows_and_send_emails = async (dbConfig) => {
 
     let results = [];
 

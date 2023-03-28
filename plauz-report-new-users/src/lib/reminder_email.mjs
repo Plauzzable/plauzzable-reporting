@@ -27,6 +27,13 @@ const _send_reminder = async (recipient, show) => {
   const STARTTIME = show.startTime;
   const NOW = show.now;
 
+  // Validate we can send an email
+  const TO = `${recipient.firstName} ${recipient.lastName}`;
+  if (TO.trim() == '') {
+    console.log(`Skipping ${recipient.email} as they have no first and last name set`);
+    return "SKIPPING";
+  }
+
   var apiKey = defaultClient.authentications['api-key'];
   apiKey.apiKey = await decrypt_env_var('SENDINBLUE_API_KEY');
 
@@ -37,7 +44,7 @@ const _send_reminder = async (recipient, show) => {
     to: [{
       // TODO: test opt out - do we need to create contacts on our side?
       email: `${recipient.email}`,
-      name: `${recipient.firstName} ${recipient.lastName}`
+      name: TO
     }],
     templateId: SENDINBLUE_REMINDER_FAN_TEMPLATE_ID,
     params: {
@@ -55,9 +62,10 @@ const _send_reminder = async (recipient, show) => {
       console.log('SendInBlue API called successfully. Returned data: ' + data);
       resolve(data);
     }, function (error) {
-      console.log('SendInBlue API called failed');
+      console.log('ERROR SendInBlue API called failed, please investigate');
       console.error(error);
-      reject(error);
+      // To avoid re-tries, we will resolve instead of reject(error)
+      resolve(data);
     });
   });
 };

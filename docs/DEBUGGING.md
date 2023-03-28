@@ -1,5 +1,13 @@
 # Debugging Tips
 
+## Timestamps
+
+* Send in blue logs `27-03-2023 04:47:48`
+* Send in blue email preview `Mar 27, 2023 4:47 PM`
+* Lambda Logs File name (Last Event Time) 2023-03-27 16:46
+* Lambda log line 2023-03-27T23:46:39.850Z
+* CloudWatch metrics 23:46
+
 ## Upcoming Shows
 
 How many minutes until the next plauzzable show?
