@@ -4,22 +4,18 @@ require('dotenv').config();
 
 const { docopt } = require('docopt');
 
-const { ensureShowIsPrivate, validateDbEnvVars } = require('../src/database');
+const { ensureShowIsPrivate, safeguardProduction, validateDbEnvVars } = require('../src/database');
 
 const DOC = `
 Usage:
-    covert-to-corparate-show <show-uuid>
+    covert-to-corparate-show <show-uuid> [--production=boolean]
+
+Options:
+    -p --production=boolean      Allow running against production databse [default: false]
 
 Admin CLI script for converting a Free show into a Corporate Show
 
 show-uuid - The Plauzzable database id for the show table
-
-NOTE: This script connects to our Postgres DB based on the following environment variables
-which must be set:
-* 
-* 
-* 
-* 
 `;
 
 let args = docopt(DOC, {
@@ -31,6 +27,9 @@ assert(!!showId, 'A show uuid is required');
 
 
 validateDbEnvVars(args);
+
+let allowProduction = args['--production'];
+safeguardProduction(allowProduction);
 
 
 console.log('Updating', args['<show-uuid>'], process.env.DATABASE_HOSTNAME);

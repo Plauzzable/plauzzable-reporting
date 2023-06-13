@@ -17,16 +17,12 @@ const validateDbEnvVars = (args) => {
     ];
     VARS.forEach(envVar => {
         let value = process.env[envVar];
-        assert(!!value && value.trim().length > 0, `Expected ${envVar} to be set, but it is not. See README.md`);
+        assert(!!value && value.trim().length > 0, `Expected ${envVar} to be set, but it is not. Please use .env file. See README.md`);
 
     });
 
     let port = dbPort();
     assert(!isNaN(port) && port > 0, `Expected DATABASE_PORT to be an integer, not ${port}`);
-
-    if (process.env.DATABASE_HOSTNAME == 'plauzzable-prod.cck1jk6oluev.us-east-1.rds.amazonaws.com') {
-        assert(false, 'Your environment variables are set to production, please use --production flag to acknowledge. See --help.')
-    }
 };
 
 const prepareDbConfig = (args, pgSchema) => {

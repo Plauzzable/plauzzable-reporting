@@ -28,8 +28,6 @@ let args = docopt(DOC, {
     help: true
 });
 
-console.log(args);
-
 let showId = args['<show-uuid>'];
 assert(!!showId, 'A show uuid is required');
 
