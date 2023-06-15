@@ -2,6 +2,8 @@
 
 ## Timestamps
 
+Example of March 27th 23:47 across various systems
+
 * Send in blue logs `27-03-2023 04:47:48`
 * Send in blue email preview `Mar 27, 2023 4:47 PM`
 * Lambda Logs File name (Last Event Time) 2023-03-27 16:46
