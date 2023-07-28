@@ -18,7 +18,7 @@ const send_show_reminder_email = async (show) => {
 const _send_reminder = async (recipient, show) => {
   const FIRSTNAME = recipient.firstName;
   const SHOWTITLE = show.title;
-  const SHOWLINK = `https://plauzzable.com/live-show/?showId=${show.id}&comedianId=${show.userId}`;
+  const SHOWLINK = `https://plauzzable.com/live-show/${show.id}/${show.userId}`;
 
   let minutes = Math.round(show.minutes);
   const STARTSINMINUTES = minutes > 1 ? 'in ' + minutes + ' minutes' : 'now';
